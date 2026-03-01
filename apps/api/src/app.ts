@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { env } from './config/env';
 import userRoutes from './modules/users/routes';
+import locationRoutes from './modules/Location/routes';
 
 export const app = express();
 
@@ -8,6 +9,7 @@ export const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/locations', locationRoutes);
 
 // Health check route
 app.get('/health', (req: Request, res: Response) => {
