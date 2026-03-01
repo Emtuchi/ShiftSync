@@ -1,0 +1,12 @@
+export enum SwapStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  MANAGER_APPROVED = 'MANAGER_APPROVED',
+  REJECTED = 'REJECTED',
+  EXPIRED = 'EXPIRED',
+}
+
+export enum SwapType {
+  DIRECT = 'DIRECT',
+  OPEN = 'OPEN',
+}
