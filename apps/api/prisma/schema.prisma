@@ -12,11 +12,18 @@ datasource db {
 // Models
 // --------------------
 
+enum UserRole {
+  ADMIN
+  MANAGER
+  STAFF
+}
+
 model User {
   id               String      @id @default(uuid())
   email            String      @unique
   name             String?
   password         String
+  role             UserRole    @default(STAFF)
   skills           StaffSkill[]
   certifications   StaffCertification[]
   assignments      ShiftAssignment[]
