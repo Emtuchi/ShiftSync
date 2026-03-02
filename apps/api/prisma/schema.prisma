@@ -124,6 +124,8 @@ model ShiftAssignment {
   swapRequest SwapRequest?     @relation("SwapOriginalAssignment")
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
+
+  @@unique([shiftId, staffId])
 }
 
 model SwapRequest {

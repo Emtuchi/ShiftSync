@@ -30,4 +30,10 @@ export const skillController = {
     await skillService.deleteSkill(req.params.id);
     res.status(204).send();
   },
+
+  async assignSkill(req: Request, res: Response) {
+    const { staffId, skillId } = req.body;
+    const record = await skillService.assignSkillToStaff(staffId, skillId);
+    res.status(201).json(record);
+  },
 };

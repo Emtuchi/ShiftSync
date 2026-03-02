@@ -30,4 +30,40 @@ export const userRepository = {
       where: { id },
     });
   },
+
+  async addCertification(staffId: string, locationId: string) {
+    return prisma.staffCertification.create({
+      data: {
+        staffId,
+        locationId,
+      },
+    });
+  },
+
+  async addAvailability(
+    staffId: string,
+    startTime: Date,
+    endTime: Date
+  ) {
+    return prisma.availabilityWindow.create({
+      data: {
+        staffId,
+        startTime,
+        endTime,
+      },
+    });
+  },
+
+  async getAvailabilityByStaff(staffId: string) {
+    return prisma.availabilityWindow.findMany({
+      where: { staffId },
+      orderBy: { startTime: 'asc' },
+    });
+  },
+
+  async deleteAvailability(id: string) {
+    return prisma.availabilityWindow.delete({
+      where: { id },
+    });
+  },
 };

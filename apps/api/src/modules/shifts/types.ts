@@ -5,7 +5,7 @@ export type ShiftResponseDTO = {
   locationId: string;
   startTime: Date;
   endTime: Date;
-  requiredSkill: string;
+  requiredSkillId: string;
   headcount: number;
   published: boolean;
   createdAt: Date;

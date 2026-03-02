@@ -61,6 +61,10 @@ export const userService = {
     await userRepository.delete(id);
   },
 
+  async addCertification(staffId: string, locationId: string) {
+    return userRepository.addCertification(staffId, locationId);
+  },
+
   toResponseDTO(user: any): UserResponseDTO {
     return {
       id: user.id,

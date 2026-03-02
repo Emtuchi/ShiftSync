@@ -8,5 +8,6 @@ router.get('/', skillController.getSkills);
 router.get('/:id', skillController.getSkillById);
 router.put('/:id', skillController.updateSkill);
 router.delete('/:id', skillController.deleteSkill);
+router.post('/assign', skillController.assignSkill);
 
 export default router;

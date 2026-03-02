@@ -34,4 +34,16 @@ export const userController = {
     const users = await userService.getAllUsers();
     res.json(users);
   },
+
+  async addCertification(req: Request, res: Response) {
+    const { staffId, locationId } = req.body;
+    
+    const record = await userService.addCertification(
+      staffId,
+      locationId
+    );
+    
+    res.status(201).json(record);
+  }
+  
 };

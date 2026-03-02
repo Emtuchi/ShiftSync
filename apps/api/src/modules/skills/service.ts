@@ -1,4 +1,5 @@
 import { skillRepository } from './repository';
+import { prisma } from '../../config/database';
 
 export const skillService = {
   createSkill(data: { name: string; description?: string }) {
@@ -20,4 +21,10 @@ export const skillService = {
   deleteSkill(id: string) {
     return skillRepository.delete(id);
   },
+
+  async assignSkillToStaff(staffId: string, skillId: string) {
+    return prisma.staffSkill.create({
+      data: { staffId, skillId },
+    });
+  }
 };

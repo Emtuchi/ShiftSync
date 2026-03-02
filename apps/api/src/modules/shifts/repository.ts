@@ -1,15 +1,17 @@
 import { prisma } from '../../config/database';
-import { Prisma, ShiftStatus, AssignmentStatus } from '@prisma/client';
+import { Prisma, ShiftStatus } from '@prisma/client';
 
 export const shiftRepository = {
+  // CREATE SHIFT
   async create(data: Prisma.ShiftCreateInput) {
     return prisma.shift.create({ data });
   },
 
+  // FIND SHIFT BY ID
   async findById(id: string) {
     return prisma.shift.findUnique({
       where: { id },
-      include: { assignments: true },
+      include: { assignments: true }, // include assignments for headcount / overlap checks
     });
   },
 
@@ -27,21 +29,13 @@ export const shiftRepository = {
   },
 
   async delete(id: string) {
-    return prisma.shift.delete({ where: { id } });
-  },
-
-  async assignStaff(shiftId: string, staffId: string) {
-    return prisma.shiftAssignment.create({
-      data: {
-        shiftId,
-        staffId,
-        status: AssignmentStatus.PENDING,
-      },
+    return prisma.shift.delete({
+      where: { id },
     });
   },
 
-  async unassignStaff(shiftId: string, staffId: string): Promise<void> {
-    await prisma.shiftAssignment.deleteMany({
+  async unassignStaff(shiftId: string, staffId: string) {
+    return prisma.shiftAssignment.deleteMany({
       where: { shiftId, staffId },
     });
   },
@@ -49,18 +43,14 @@ export const shiftRepository = {
   async publishShift(id: string) {
     return prisma.shift.update({
       where: { id },
-      data: { status: ShiftStatus.PUBLISHED,
-              published: true 
-        },
+      data: { status: ShiftStatus.PUBLISHED, published: true },
     });
   },
 
   async unpublishShift(id: string) {
     return prisma.shift.update({
       where: { id },
-      data: { status: ShiftStatus.DRAFT, 
-              published: false,
-       },
+      data: { status: ShiftStatus.DRAFT, published: false },
     });
   },
 };
