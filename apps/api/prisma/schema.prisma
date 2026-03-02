@@ -8,9 +8,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// --------------------
-// Models
-// --------------------
+enum AssignmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum SwapType {
+  FULL
+  PARTIAL
+}
+
+enum SwapStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
 
 enum UserRole {
   ADMIN
@@ -18,41 +31,51 @@ enum UserRole {
   STAFF
 }
 
+enum ShiftStatus {
+  DRAFT
+  PUBLISHED
+  CANCELLED
+}
+
+// --------------------
+// Models
+// --------------------
+
 model User {
-  id               String      @id @default(uuid())
-  email            String      @unique
-  name             String?
-  password         String
-  role             UserRole    @default(STAFF)
-  skills           StaffSkill[]
-  certifications   StaffCertification[]
-  assignments      ShiftAssignment[]
-  swapsRequested   SwapRequest[]        @relation("TargetSwapStaff")
-  notifications    Notification[]
-  availability     AvailabilityWindow[]
+  id             String               @id @default(uuid())
+  email          String               @unique
+  name           String?
+  password       String
+  role           UserRole             @default(STAFF)
+  skills         StaffSkill[]
+  certifications StaffCertification[]
+  assignments    ShiftAssignment[]
+  swapsRequested SwapRequest[]        @relation("TargetSwapStaff")
+  notifications  Notification[]
+  availability   AvailabilityWindow[]
 
   // Many-to-many relation to Location
-  managedLocations Location[]   @relation("ManagerLocations")
+  managedLocations Location[] @relation("ManagerLocations")
 }
 
 model Location {
-  id             String   @id @default(uuid())
-  name           String
-  address        String
-  shifts         Shift[]
-  
+  id      String  @id @default(uuid())
+  name    String
+  address String
+  shifts  Shift[]
+
   // Many-to-many relation to User
-  managers       User[]   @relation("ManagerLocations")
-  
+  managers User[] @relation("ManagerLocations")
+
   certifications StaffCertification[]
-  createdAt      DateTime @default(now())
+  createdAt      DateTime             @default(now())
 }
 
 model Skill {
-  id    String        @id @default(uuid())
-  name  String
+  id               String       @id @default(uuid())
+  name             String
   requiredForShift Shift[]
-  staffSkills StaffSkill[]
+  staffSkills      StaffSkill[]
 }
 
 model StaffSkill {
@@ -72,45 +95,43 @@ model StaffCertification {
 }
 
 model Shift {
-  id            String           @id @default(uuid())
-  location      Location         @relation(fields: [locationId], references: [id])
-  locationId    String
-  requiredSkill Skill            @relation(fields: [requiredSkillId], references: [id])
+  id              String            @id @default(uuid())
+  location        Location          @relation(fields: [locationId], references: [id])
+  locationId      String
+  startTime       DateTime
+  endTime         DateTime
+  requiredSkill   Skill             @relation(fields: [requiredSkillId], references: [id])
   requiredSkillId String
-  assignments   ShiftAssignment[]
+  headcount       Int
+  published       Boolean           @default(false)
+  assignments     ShiftAssignment[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  status          ShiftStatus       @default(DRAFT)
 }
 
 model ShiftAssignment {
-  id       String       @id @default(uuid())
-  shift    Shift        @relation(fields: [shiftId], references: [id])
-  shiftId  String
-  staff    User         @relation(fields: [staffId], references: [id])
-  staffId  String
-
-  swap     SwapRequest? @relation("SwapOriginalAssignment") // only relation name, no fields/references
-}
-
-enum SwapType {
-  FULL
-  PARTIAL
-}
-
-enum SwapStatus {
-  PENDING
-  APPROVED
-  REJECTED
+  id          String           @id @default(uuid())
+  shift       Shift            @relation(fields: [shiftId], references: [id])
+  shiftId     String
+  staff       User             @relation(fields: [staffId], references: [id])
+  staffId     String
+  status      AssignmentStatus @default(PENDING) // PENDING, CONFIRMED, CANCELLED
+  swapRequest SwapRequest?     @relation("SwapOriginalAssignment")
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 }
 
 model SwapRequest {
-  id                  String          @id @default(uuid())
-  type                SwapType
-  originalAssignment  ShiftAssignment @relation("SwapOriginalAssignment", fields: [originalAssignmentId], references: [id])
-  originalAssignmentId String         @unique
-  targetStaff          User?          @relation("TargetSwapStaff", fields: [targetStaffId], references: [id])
+  id                   String          @id @default(uuid())
+  type                 SwapType
+  originalAssignment   ShiftAssignment @relation("SwapOriginalAssignment", fields: [originalAssignmentId], references: [id])
+  originalAssignmentId String          @unique
+  targetStaff          User?           @relation("TargetSwapStaff", fields: [targetStaffId], references: [id])
   targetStaffId        String?
-  status               SwapStatus     @default(PENDING)
-  createdAt            DateTime       @default(now())
-  updatedAt            DateTime       @updatedAt
+  status               SwapStatus      @default(PENDING)
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
 }
 
 model AvailabilityWindow {
