@@ -4,6 +4,7 @@ import userRoutes from './modules/users/routes';
 import locationRoutes from './modules/Location/routes';
 import shiftRoutes from './modules/shifts/routes';
 import skillRoutes from './modules/skills/routes';
+import swapRoutes from './modules/swaps/routes';
 
 export const app = express();
 
@@ -14,6 +15,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 app.use('/api/v1/shifts', shiftRoutes);
 app.use('/api/v1/skills', skillRoutes);
+app.use('/api/v1/swaps', swapRoutes);
 
 // Health check route
 app.get('/health', (req: Request, res: Response) => {
