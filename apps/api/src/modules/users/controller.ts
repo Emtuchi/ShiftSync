@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { userService } from './service';
 import { createUserSchema, updateUserSchema } from './validator';
 
-
 interface UserParams {
   id: string;
 }
@@ -37,13 +36,30 @@ export const userController = {
 
   async addCertification(req: Request, res: Response) {
     const { staffId, locationId } = req.body;
-    
-    const record = await userService.addCertification(
-      staffId,
-      locationId
-    );
-    
+    const record = await userService.addCertification(staffId, locationId);
     res.status(201).json(record);
-  }
-  
+  },
+
+  async addAvailability(req: Request<UserParams>, res: Response) {
+    const { startTime, endTime } = req.body;
+
+    const availability = await userService.addAvailability(
+      req.params.id,
+      startTime,
+      endTime
+    );
+
+    res.status(201).json(availability);
+  },
+
+  async getAvailability(req: Request<UserParams>, res: Response) {
+    const availability = await userService.getAvailability(req.params.id);
+    res.json(availability);
+  },
+
+  async deleteAvailability(req: Request<{ id: string; availabilityId: string }>, res: Response) {
+    const { availabilityId } = req.params;
+    await userService.deleteAvailability(availabilityId);
+    res.status(204).send();
+  },
 };
