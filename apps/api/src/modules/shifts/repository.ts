@@ -49,14 +49,18 @@ export const shiftRepository = {
   async publishShift(id: string) {
     return prisma.shift.update({
       where: { id },
-      data: { status: ShiftStatus.PUBLISHED },
+      data: { status: ShiftStatus.PUBLISHED,
+              published: true 
+        },
     });
   },
 
   async unpublishShift(id: string) {
     return prisma.shift.update({
       where: { id },
-      data: { status: ShiftStatus.DRAFT },
+      data: { status: ShiftStatus.DRAFT, 
+              published: false,
+       },
     });
   },
 };
