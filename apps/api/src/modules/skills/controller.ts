@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { skillService } from './service';
+import { skillService } from './service.js';
 
 interface SkillParams {
   id: string;
