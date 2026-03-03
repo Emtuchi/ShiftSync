@@ -15,8 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('ShiftSync Backend API
-Use /users, /shifts, /swaps, etc. with JSON requests');
+  res.json({
+    message: 'ShiftSync Backend API',
+    info: 'Use /users, /shifts, /swaps, etc. with JSON requests'
+  });
 });
 
 app.use('/api/v1/users', userRoutes);
