@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { swapController } from './controller';
+import { swapController } from './controller.js';
 
 const router = Router();
 
