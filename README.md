@@ -142,7 +142,9 @@ Daily/weekly hours monitored, but warnings are console-only.
 - Users cannot set preferences.
 Notifications are API-only; no real-time push.
 - Swap and assignment workflows are not fully integrated with notifications.
-- Time Handling & Calendar Features
+
+## Time Handling & Calendar Features
+
 - No timezone awareness; shifts/availability may mismatch across locations.
 - Overnight shifts not fully integrated with overtime or consecutive-day checks.
 Daylight saving and recurring availability are unsupported.
