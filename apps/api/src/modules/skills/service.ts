@@ -1,5 +1,5 @@
-import { skillRepository } from './repository';
-import { prisma } from '../../config/database';
+import { skillRepository } from './repository.js';
+import { prisma } from '../../config/database.js';
 
 export const skillService = {
   createSkill(data: { name: string; description?: string }) {
