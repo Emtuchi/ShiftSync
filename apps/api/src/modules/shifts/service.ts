@@ -1,9 +1,9 @@
-import { shiftRepository } from './repository';
-import { ShiftResponseDTO } from './types';
-import { AppError } from '../../shared/errors/App.error';
+import { shiftRepository } from './repository.js';
+import { ShiftResponseDTO } from './types.js';
+import { AppError } from '../../shared/errors/App.error.js';
 import { PrismaClient, AssignmentStatus, ShiftStatus, UserRole } from '@prisma/client';
-import { validateAssignmentRules } from './shiftvalidator';
-import { overtimeService } from '../overtime/service';
+import { validateAssignmentRules } from './shiftvalidator.js';
+import { overtimeService } from '../overtime/service.js';
 
 const prisma = new PrismaClient();
 
