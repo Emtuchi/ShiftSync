@@ -1,4 +1,4 @@
-import { hoursBetween } from './time.util'
+import { hoursBetween } from './time.util.js'
 
 export function calculateTotalHours(
   shifts: { start: Date; end: Date }[]
