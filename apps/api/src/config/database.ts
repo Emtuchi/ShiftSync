@@ -1,6 +1,6 @@
 // api/src/config/database.ts
 import { PrismaClient } from '@prisma/client';
-import { env } from './env'; // your validated env
+import { env } from './env.js'; // your validated env
 
 // Initialize Prisma with optional logging in development
 export const prisma = new PrismaClient({
