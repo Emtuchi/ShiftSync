@@ -1,12 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { env } from './config/env';
-import userRoutes from './modules/users/routes';
-import locationRoutes from './modules/Location/routes';
-import shiftRoutes from './modules/shifts/routes';
-import skillRoutes from './modules/skills/routes';
-import swapRoutes from './modules/swaps/routes';
-import fairnessRouter  from './modules/fairness/routes';
-import notificationRouter from './modules/notifications/routes';
+import { env } from './config/env.js';
+import userRoutes from './modules/users/routes.js';
+import locationRoutes from './modules/Location/routes.js';
+import shiftRoutes from './modules/shifts/routes.js';
+import skillRoutes from './modules/skills/routes.js';
+import swapRoutes from './modules/swaps/routes.js';
+import fairnessRouter  from './modules/fairness/routes.js';
+import notificationRouter from './modules/notifications/routes.js';
 
 export const app = express();
 
