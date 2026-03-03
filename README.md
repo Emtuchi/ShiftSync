@@ -93,3 +93,66 @@ POST /notifications/ — Body: { "userId": string, "message": string } — Creat
 GET /notifications/:userId — Path param: userId — Get all notifications for a user
 
 PATCH /notifications/:id/read — Path param: id — Mark a notification as read
+
+
+
+# ShiftSync Backend Limitations
+
+## User Management & Roles
+
+- Role-based restrictions are incomplete; - managers can be treated as staff or create other managers.
+- Certification logic is basic; no duplicate checks or validation of location existence.
+- Skills are only validated during shift assignment, not on user creation or updates.
+
+## Shift Scheduling
+
+Basic shift creation and assignment work, but:
+- Cross-timezone conflicts are not checked.
+- Overnight shifts are miscounted in daily/weekly hours.
+- Minimum 10-hour gap between shifts is not enforced.
+
+## Availability & Scheduling Constraints
+
+- Overlapping availability windows are not validated.
+- Recurring availability is not supported.
+- No timezone handling; assumes server local time.
+- Overtime & Labor Law Compliance
+Daily/weekly hours monitored, but warnings are console-only.
+- Weekly overtime limits are not enforced.
+- Consecutive days calculation uses calendar days, not actual shift durations.
+
+## Swap / Coverage System
+
+- Swap requests do not auto-cancel if shifts are edited.
+- Pending swap/drop request limits (3 per staff) are not enforced but exists.
+- Drop request expiries (24h before shift) are not implemented.
+- Notifications exist but are not real-time or fully integrated with workflows.
+
+## Fairness Analytics
+
+- Staff hours and premium shift summaries exist.
+- No fairness scoring or tracking of “desirable shifts” for inequities.
+
+## Real-Time Functionality
+- REST-only backend; no WebSocket or live updates.
+- Simultaneous assignment conflicts are not detected automatically.
+
+## Notifications & Communication
+
+- Users cannot set preferences.
+Notifications are API-only; no real-time push.
+- Swap and assignment workflows are not fully integrated with notifications.
+- Time Handling & Calendar Features
+- No timezone awareness; shifts/availability may mismatch across locations.
+- Overnight shifts not fully integrated with overtime or consecutive-day checks.
+Daylight saving and recurring availability are unsupported.
+
+## Audit Trail & History
+
+- No structured logging for edits, assignments, or deletions.
+- Managers cannot view full history; admins cannot export logs.
+
+## Edge Case Handling
+
+- Partial enforcement of key constraints (skills, location, hours).
+- Scenarios like cross-timezone staff, simultaneous assignments, change-of-mind swaps, and last-minute cancellations are not fully handled.
