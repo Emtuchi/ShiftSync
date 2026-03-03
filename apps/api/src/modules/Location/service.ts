@@ -1,7 +1,7 @@
-import { locationRepository } from './repository';
-import { AppError } from '../../shared/errors/App.error';
-import { CreateLocationDTO, UpdateLocationDTO } from './validator';
-import { LocationResponseDTO } from './types';
+import { locationRepository } from './repository.js';
+import { AppError } from '../../shared/errors/App.error.js';
+import { CreateLocationDTO, UpdateLocationDTO } from './validator.js';
+import { LocationResponseDTO } from './types.js';
 
 export const locationService = {
   async createLocation(data: CreateLocationDTO): Promise<LocationResponseDTO> {
