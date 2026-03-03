@@ -1,7 +1,7 @@
 // api/src/main.ts
 import { app } from './app.js';
 import { env } from './config/env.js';
-import { prisma } from './config/database';
+import { prisma } from './config/database.js';
 
 async function bootstrap() {
   try {
