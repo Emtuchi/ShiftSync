@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import { userRepository } from './repository';
-import { CreateUserDTO, UpdateUserDTO } from './validator';
-import { AppError } from '../../shared/errors/App.error';
-import { UserResponseDTO } from './types';
+import { userRepository } from './repository.js';
+import { CreateUserDTO, UpdateUserDTO } from './validator.js';
+import { AppError } from '../../shared/errors/App.error.js';
+import { UserResponseDTO } from './types.js';
 
 export const userService = {
   async createUser(data: CreateUserDTO): Promise<UserResponseDTO> {
