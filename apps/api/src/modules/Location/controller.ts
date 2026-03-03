@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { locationService } from './service';
-import { createLocationSchema, updateLocationSchema } from './validator';
+import { locationService } from './service.js';
+import { createLocationSchema, updateLocationSchema } from './validator.js';
 
 export const locationController = {
   async create(req: Request, res: Response) {
