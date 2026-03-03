@@ -14,11 +14,24 @@ export const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'ShiftSync Backend API',
-    info: 'Use /users, /shifts, /swaps, etc. with JSON requests'
-  });
+
+app.get('/', (_req, res) => {
+  const response = {
+    message: 'ShiftSync backend API is live. Use Postman to send JSON requests to the endpoints.',
+    baseUrl: 'https://shiftsync.onrender.com',
+    endpoints: [
+      'GET /users',
+      'POST /users',
+      'GET /shifts',
+      'POST /shifts/:id/assign',
+      'POST /swaps',
+      'GET /notifications',
+    ],
+    note: 'Authentication may be required for some endpoints.',
+  };
+
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(response, null, 2)); // the 2 adds indentation
 });
 
 app.use('/api/v1/users', userRoutes);
