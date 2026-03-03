@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('This is the ShiftSync backend API. No frontend is served here.');
+  res.send('ShiftSync Backend API
+Use /users, /shifts, /swaps, etc. with JSON requests');
 });
 
 app.use('/api/v1/users', userRoutes);
