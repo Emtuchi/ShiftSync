@@ -6,10 +6,10 @@ import { prisma } from './config/database';
 async function bootstrap() {
   try {
     await prisma.$connect();
-    console.log('✅ Connected to database');
+    console.log('Connected to database');
 
     app.listen(env.PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${env.PORT}`);
+      console.log(`Server running on http://localhost:${env.PORT}`);
     });
 
     // Only log ENV in development for safety
