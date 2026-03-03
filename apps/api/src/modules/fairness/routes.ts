@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { fairnessController } from './controller';
+import { fairnessController } from './controller.js';
 
 const fairnessRouter = Router();
 
