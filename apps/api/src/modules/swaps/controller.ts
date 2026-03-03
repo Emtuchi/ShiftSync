@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { swapService } from './service';
+import { swapService } from './service.js';
 
 interface SwapParams {
   id: string;
