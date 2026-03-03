@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { fairnessService } from './service';
+import { fairnessService } from './service.js';
 
 export const fairnessController = {
   async staffHoursSummary(req: Request, res: Response) {
