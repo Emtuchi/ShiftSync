@@ -1,5 +1,5 @@
 import { PrismaClient, SwapStatus, AssignmentStatus } from '@prisma/client';
-import { AppError } from '../../shared/errors/App.error';
+import { AppError } from '../../shared/errors/App.error.js';
 
 const prisma = new PrismaClient();
 
