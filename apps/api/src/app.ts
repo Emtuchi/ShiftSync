@@ -13,6 +13,11 @@ export const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+  res.send('This is the ShiftSync backend API. No frontend is served here.');
+});
+
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 app.use('/api/v1/shifts', shiftRoutes);
