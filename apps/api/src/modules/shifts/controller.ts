@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { shiftService } from './service';
-import { createShiftSchema, updateShiftSchema } from './validator';
+import { shiftService } from './service.js';
+import { createShiftSchema, updateShiftSchema } from './validator.js';
 
 interface ShiftParams {
   id: string;
