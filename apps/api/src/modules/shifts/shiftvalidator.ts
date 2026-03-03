@@ -1,6 +1,6 @@
 // modules/shifts/validators.ts
 import { PrismaClient, Shift, User, AssignmentStatus } from '@prisma/client';
-import { AppError } from '../../shared/errors/App.error';
+import { AppError } from '../../shared/errors/App.error.js';
 
 export async function validateAssignmentRules(
   tx: PrismaClient,
