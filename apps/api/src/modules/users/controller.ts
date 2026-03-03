@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { userService } from './service';
-import { createUserSchema, updateUserSchema } from './validator';
+import { userService } from './service.js';
+import { createUserSchema, updateUserSchema } from './validator.js';
 
 interface UserParams {
   id: string;
